@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary meta tags -->
+    <title>Wealthome - Premium Real Estate</title>
+    <meta name="title" content="Wealthome - Premium Real Estate" />
+    <meta
+      name="description"
+      content="Find your dream home with Wealthome - the premium real estate platform for luxury properties"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon" />
+
+    <!-- Google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Material icon link -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0"
+    />
+
+    <!-- Custom CSS link -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header" data-header>
+      <div class="container">
+        <a href="#" class="logo">
+          <img
+            src="./assets/images/logo.png"
+            alt="Wealthome"
+            width="190"
+            height="28"
+            class="logo-img neon-glow"
+          />
+        </a>
+
+        <nav class="navbar" data-navbar>
+          <ul class="navbar-list">
+            <li>
+              <a href="#" class="navbar-link label-medium active neon-text">Home</a>
+            </li>
+
+            <li>
+              <a href="./pages/rent.html" class="navbar-link label-medium neon-text-hover">Rent</a>
+            </li>
+
+            <li>
+              <a href="./pages/sell.html" class="navbar-link label-medium neon-text-hover">Sell</a>
+            </li>
+
+            <li>
+              <a href="./pages/buy.html" class="navbar-link label-medium neon-text-hover">Buy</a>
+            </li>
+
+            <li>
+              <a href="./pages/about.html" class="navbar-link label-medium neon-text-hover">About</a>
+            </li>
+          </ul>
+
+          <div class="navbar-wrapper">
+            <a href="./pages/login.html" class="btn-link label-medium neon-text-hover" id="loginBtn">Login</a>
+            <a href="./pages/login.html" class="btn btn-fill label-medium neon-btn">Get Started</a>
+            <a href="#" class="btn-link label-medium neon-text-hover hidden" id="logoutBtn">Logout</a>
+            <a href="./pages/dashboard.html" class="btn-link label-medium neon-text-hover hidden" id="dashboardBtn">My Dashboard</a>
+          </div>
+        </nav>
+
+        <button
+          class="nav-toggle-btn icon-btn"
+          aria-label="toggle navbar"
+          data-nav-toggler
+        >
+          <span class="material-symbols-rounded open" aria-hidden="true">menu</span>
+          <span class="material-symbols-rounded close" aria-hidden="true">close</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <article>
+        <!-- HERO SECTION -->
+        <section class="hero">
+          <div class="container">
+            <div class="hero-content">
+              <h1 class="headline-large hero-title">
+                Find a place where you can be <span class="highlight neon-text">yourself</span>.
+              </h1>
+
+              <p class="body-large hero-text">
+                If you're looking for a place where you can be yourself, don't
+                give up. Keep searching until you find a place that feels like
+                home. Our premium properties await your discovery.
+              </p>
+
+              <form action="./pages/buy.html" method="get" class="search-bar neon-box">
+                <label class="search-item">
+                  <span class="label-medium label">Want to</span>
+
+                  <select name="want-to" class="search-item-field body-medium">
+                    <option value="buy" selected>Buy</option>
+                    <option value="sell">Sell</option>
+                    <option value="rent">Rent</option>
+                  </select>
+
+                  <span class="material-symbols-rounded neon-icon" aria-hidden="true">real_estate_agent</span>
+                </label>
+
+                <label class="search-item">
+                  <span class="label-medium label">Property type</span>
+
+                  <select
+                    name="property-type"
+                    class="search-item-field body-medium"
+                  >
+                    <option value="any" selected>Any</option>
+                    <option value="houses">Houses</option>
+                    <option value="apartments">Apartments</option>
+                    <option value="villa">Villa</option>
+                    <option value="townhome">Townhome</option>
+                    <option value="bungalow">Bungalow</option>
+                    <option value="loft">Loft</option>
+                  </select>
+
+                  <span class="material-symbols-rounded neon-icon" aria-hidden="true">gite</span>
+                </label>
+
+                <label class="search-item">
+                  <span class="label-medium label">Location</span>
+
+                  <input
+                    type="text"
+                    name="location"
+                    placeholder="Street, City, Zip..."
+                    class="search-item-field body-medium"
+                  />
+
+                  <span class="material-symbols-rounded neon-icon" aria-hidden="true">location_on</span>
+                </label>
+
+                <button type="submit" class="search-btn neon-btn">
+                  <span class="material-symbols-rounded" aria-hidden="true">search</span>
+                  <span class="label-medium">Search</span>
+                </button>
+              </form>
+            </div>
+
+            <img
+              src="./assets/images/hero.png"
+              width="816"
+              height="659"
+              role="presentation"
+              class="hero-banner neon-glow"
+            />
+
+            <img
+              src="./assets/images/bg-pattern.png"
+              width="1240"
+              height="840"
+              role="presentation"
+              class="bg-pattern"
+            />
+          </div>
+        </section>
+
+        <!-- PROPERTY SECTION -->
+        <section class="section property" aria-labelledby="property-label">
+          <div class="container">
+            <div class="title-wrapper">
+              <div>
+                <h2 class="section-title headline-small" id="property-label">
+                  Best <span class="highlight neon-text">homes</span> in your city
+                </h2>
+
+                <p class="section-text body-large">
+                  Discover exceptional properties that match your lifestyle and preferences.
+                  Our curated selection represents the finest homes available in premium locations.
+                </p>
+              </div>
+
+              <a href="./pages/buy.html" class="btn btn-outline neon-btn-outline">
+                <span class="label-medium">Explore more</span>
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_outward</span>
+              </a>
+            </div>
+
+            <div class="property-list" id="featured-properties">
+              <!-- Property Card 1 -->
+              <div class="card neon-card" data-aos="fade-up">
+                <div class="card-banner">
+                  <figure class="img-holder" style="--width: 585; --height: 390">
+                    <img
+                      src="./assets/images/property-1.jpg"
+                      width="585"
+                      height="390"
+                      alt="COVA Home Realty"
+                      class="img-cover"
+                    />
+                  </figure>
+
+                  <span class="badge label-medium neon-badge">New</span>
+
+                  <button
+                    class="icon-btn fav-btn neon-icon-btn"
+                    aria-label="add to favorite"
+                    data-toggle-btn
+                  >
+                    <span class="material-symbols-rounded" aria-hidden="true">favorite</span>
+                  </button>
+                </div>
+
+                <div class="card-content">
+                  <span class="title-large neon-price">₹40,000,000</span>
+
+                  <h3>
+                    <a href="#" class="title-small card-title neon-text-hover">COVA Home Realty</a>
+                  </h3>
+
+                  <address class="body-medium card-text">
+                    1901 Thornridge Cir. Shiloh, Hawaii 81063
+                  </address>
+
+                  <div class="card-meta-list">
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">bed</span>
+                      <span class="meta-text label-medium">3 Bed</span>
+                    </div>
+
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">bathtub</span>
+                      <span class="meta-text label-medium">2 Bath</span>
+                    </div>
+
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">straighten</span>
+                      <span class="meta-text label-medium">1430 sqft</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 2 -->
+              <div class="card neon-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-banner">
+                  <figure class="img-holder" style="--width: 585; --height: 390">
+                    <img
+                      src="./assets/images/property-2.jpg"
+                      width="585"
+                      height="390"
+                      alt="Exit Realty"
+                      class="img-cover"
+                    />
+                  </figure>
+
+                  <button
+                    class="icon-btn fav-btn neon-icon-btn"
+                    aria-label="add to favorite"
+                    data-toggle-btn
+                  >
+                    <span class="material-symbols-rounded" aria-hidden="true">favorite</span>
+                  </button>
+                </div>
+
+                <div class="card-content">
+                  <span class="title-large neon-price">₹60,000,000</span>
+
+                  <h3>
+                    <a href="#" class="title-small card-title neon-text-hover">Exit Realty</a>
+                  </h3>
+
+                  <address class="body-medium card-text">
+                    2972 Westheimer Rd. Santa Ana, Illinois 85486
+                  </address>
+
+                  <div class="card-meta-list">
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">bed</span>
+                      <span class="meta-text label-medium">5 Bed</span>
+                    </div>
+
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">bathtub</span>
+                      <span class="meta-text label-medium">4 Bath</span>
+                    </div>
+
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">straighten</span>
+                      <span class="meta-text label-medium">1630 sqft</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Card 3 -->
+              <div class="card neon-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-banner">
+                  <figure class="img-holder" style="--width: 585; --height: 390">
+                    <img
+                      src="./assets/images/property-3.jpg"
+                      width="585"
+                      height="390"
+                      alt="The Real Estate Group"
+                      class="img-cover"
+                    />
+                  </figure>
+
+                  <button
+                    class="icon-btn fav-btn neon-icon-btn"
+                    aria-label="add to favorite"
+                    data-toggle-btn
+                  >
+                    <span class="material-symbols-rounded" aria-hidden="true">favorite</span>
+                  </button>
+                </div>
+
+                <div class="card-content">
+                  <span class="title-large neon-price">₹56,000,000</span>
+
+                  <h3>
+                    <a href="#" class="title-small card-title neon-text-hover">The Real Estate Group</a>
+                  </h3>
+
+                  <address class="body-medium card-text">
+                    2118 Thornridge Cir. Syracuse, Connecticut 35624
+                  </address>
+
+                  <div class="card-meta-list">
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">bed</span>
+                      <span class="meta-text label-medium">8 Bed</span>
+                    </div>
+
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">bathtub</span>
+                      <span class="meta-text label-medium">5 Bath</span>
+                    </div>
+
+                    <div class="meta-item">
+                      <span class="material-symbols-rounded meta-icon neon-icon" aria-hidden="true">straighten</span>
+                      <span class="meta-text label-medium">1240 sqft</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEATURE SECTION -->
+        <section class="section feature" aria-labelledby="feature-label">
+          <div class="container">
+            <figure class="feature-banner neon-box" data-aos="fade-right">
+              <img
+                src="./assets/images/feature-banner-1.jpg"
+                width="1020"
+                height="690"
+                loading="lazy"
+                alt="feature banner"
+                class="img-cover"
+              />
+            </figure>
+
+            <div class="feature-content" data-aos="fade-left">
+              <h2 class="headline-medium" id="feature-label">
+                We Specialize In <span class="highlight neon-text">Quality</span> Home Renovations
+              </h2>
+
+              <p class="body-large feature-text">
+                Looking to renovate your home to reflect your style and
+                personality? Look no further than our team of experts who
+                specialize in quality home renovations to transform your space
+                into a dream home you'll love. From design to execution, we handle every detail.
+              </p>
+
+              <ul class="feature-list">
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Smart Home Integration</span>
+                </li>
+
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Beautiful Scene Around</span>
+                </li>
+
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Exceptional Lifestyle</span>
+                </li>
+
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Complete 24/7 Security</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section feature feature-2" aria-labelledby="feature-label-2">
+          <div class="container">
+            <figure class="feature-banner neon-box" data-aos="fade-left">
+              <img
+                src="./assets/images/feature-banner-2.jpg"
+                width="1020"
+                height="690"
+                loading="lazy"
+                alt="feature banner"
+                class="img-cover"
+              />
+            </figure>
+
+            <div class="feature-content" data-aos="fade-right">
+              <h2 class="headline-medium" id="feature-label-2">
+                We Are Experts In <span class="highlight neon-text">Historic</span> Home Renovations
+              </h2>
+
+              <p class="body-large feature-text">
+                Our specialized team excels in preserving the character and charm of historic homes
+                while modernizing them for contemporary living. We understand the unique challenges
+                of historic renovations and bring decades of experience to every project.
+              </p>
+
+              <ul class="feature-list">
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Period-Accurate Restoration</span>
+                </li>
+
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Modern Amenities Integration</span>
+                </li>
+
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Structural Reinforcement</span>
+                </li>
+
+                <li class="feature-item neon-list-item">
+                  <span class="material-symbols-rounded feature-icon neon-icon" aria-hidden="true">check_circle</span>
+                  <span class="body-medium">Energy Efficiency Upgrades</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section class="section video">
+          <div class="container">
+            <div class="video-card neon-box" data-aos="zoom-in">
+              <button class="play-btn neon-play-btn" aria-label="play video" id="videoPlayBtn">
+                <span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- STORY SECTION -->
+        <section class="section story">
+          <div class="container">
+            <div class="title-wrapper">
+              <div>
+                <p class="section-subtitle title-medium neon-text">Our Customers</p>
+
+                <h2 class="section-title headline-medium">
+                  We Help <span class="highlight neon-text">1000+</span> Family Find Their True Home
+                </h2>
+
+                <ul class="avatar-list">
+                  <li class="avatar neon-avatar">
+                    <img
+                      src="./assets/images/avatar-1.jpg"
+                      width="120"
+                      height="80"
+                      loading="lazy"
+                      alt="John smith"
+                      class="img-cover"
+                    />
+                  </li>
+
+                  <li class="avatar neon-avatar">
+                    <img
+                      src="./assets/images/avatar-2.jpg"
+                      width="120"
+                      height="80"
+                      loading="lazy"
+                      alt="Jane smith"
+                      class="img-cover"
+                    />
+                  </li>
+
+                  <li class="avatar neon-avatar">
+                    <img
+                      src="./assets/images/avatar-3.jpg"
+                      width="120"
+                      height="80"
+                      loading="lazy"
+                      alt="John smith"
+                      class="img-cover"
+                    />
+                  </li>
+
+                  <li class="avatar neon-avatar">
+                    <img
+                      src="./assets/images/avatar-4.jpg"
+                      width="120"
+                      height="80"
+                      loading="lazy"
+                      alt="Jane smith"
+                      class="img-cover"
+                    />
+
+                    <div class="overlay-content">
+                      <span class="label-medium">99+</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <a href="#" class="btn btn-outline neon-btn-outline">
+                <span class="label-medium">View All Stories</span>
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_outward</span>
+              </a>
+            </div>
+
+            <ul class="story-list">
+              <li
+                class="story-card neon-story-card"
+                style="background-image: url('./assets/images/story-1.jpg')"
+                data-aos="fade-up"
+              >
+                <a href="#" class="overlay-content">
+                  <div>
+                    <h3 class="title-small">Chris Traeger</h3>
+
+                    <div class="rating-wrapper">
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+
+                      <data value="5" class="title-small rating-text">5.0</data>
+                    </div>
+                  </div>
+
+                  <figure class="card-avatar neon-avatar">
+                    <img
+                      src="./assets/images/story-avatar-1.jpg"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      alt="Chris Traeger"
+                      class="img-cover"
+                    />
+                  </figure>
+                </a>
+              </li>
+
+              <li
+                class="story-card neon-story-card"
+                style="background-image: url('./assets/images/story-2.jpg')"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <a href="#" class="overlay-content">
+                  <div>
+                    <h3 class="title-small">Duke Silver</h3>
+
+                    <div class="rating-wrapper">
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+
+                      <data value="5" class="title-small rating-text">5.0</data>
+                    </div>
+                  </div>
+
+                  <figure class="card-avatar neon-avatar">
+                    <img
+                      src="./assets/images/story-avatar-2.jpg"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      alt="Duke Silver"
+                      class="img-cover"
+                    />
+                  </figure>
+                </a>
+              </li>
+
+              <li
+                class="story-card neon-story-card"
+                style="background-image: url('./assets/images/story-3.jpg')"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <a href="#" class="overlay-content">
+                  <div>
+                    <h3 class="title-small">Tsukasa Aoi</h3>
+
+                    <div class="rating-wrapper">
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+
+                      <data value="5" class="title-small rating-text">5.0</data>
+                    </div>
+                  </div>
+
+                  <figure class="card-avatar neon-avatar">
+                    <img
+                      src="./assets/images/story-avatar-3.jpg"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      alt="Tsukasa Aoi"
+                      class="img-cover"
+                    />
+                  </figure>
+                </a>
+              </li>
+
+              <li
+                class="story-card neon-story-card"
+                style="background-image: url('./assets/images/story-4.jpg')"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <a href="#" class="overlay-content">
+                  <div>
+                    <h3 class="title-small">Freida Varnes</h3>
+
+                    <div class="rating-wrapper">
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+
+                      <data value="5" class="title-small rating-text">5.0</data>
+                    </div>
+                  </div>
+
+                  <figure class="card-avatar neon-avatar">
+                    <img
+                      src="./assets/images/story-avatar-4.jpg"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      alt="Freida Varnes"
+                      class="img-cover"
+                    />
+                  </figure>
+                </a>
+              </li>
+
+              <li
+                class="story-card neon-story-card"
+                style="background-image: url('./assets/images/story-5.jpg')"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                <a href="#" class="overlay-content">
+                  <div>
+                    <h3 class="title-small">Carl Lorthner</h3>
+
+                    <div class="rating-wrapper">
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+
+                      <data value="5" class="title-small rating-text">5.0</data>
+                    </div>
+                  </div>
+
+                  <figure class="card-avatar neon-avatar">
+                    <img
+                      src="./assets/images/story-avatar-5.jpg"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      alt="Carl Lorthner"
+                      class="img-cover"
+                    />
+                  </figure>
+                </a>
+              </li>
+
+              <li
+                class="story-card neon-story-card"
+                style="background-image: url('./assets/images/story-6.jpg')"
+                data-aos="fade-up"
+                data-aos-delay="500"
+              >
+                <a href="#" class="overlay-content">
+                  <div>
+                    <h3 class="title-small">Marci Senter</h3>
+
+                    <div class="rating-wrapper">
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+                      <span class="material-symbols-rounded neon-star" aria-hidden="true">star</span>
+
+                      <data value="5" class="title-small rating-text">5.0</data>
+                    </div>
+                  </div>
+
+                  <figure class="card-avatar neon-avatar">
+                    <img
+                      src="./assets/images/story-avatar-6.jpg"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      alt="Marci Senter"
+                      class="img-cover"
+                    />
+                  </figure>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- NEWSLETTER SECTION -->
+        <section class="section newsletter">
+          <div class="container">
+            <div class="newsletter-card neon-box" data-aos="fade-up">
+              <h2 class="headline-medium">Subscribe to Our Newsletter</h2>
+              <p class="body-large">Stay updated with the latest properties and real estate news</p>
+              
+              <form class="newsletter-form" id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required class="newsletter-input">
+                <button type="submit" class="btn btn-fill neon-btn">Subscribe</button>
+              </form>
+              <p class="newsletter-success hidden" id="newsletter-success">Thank you for subscribing!</p>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <!-- VIDEO MODAL -->
+    <div class="video-modal" id="videoModal">
+      <div class="video-modal-content neon-box">
+        <button class="close-modal neon-close-btn" id="closeVideoModal">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="video-container">
+          <iframe width="560" height="315" src="" title="Property Tour Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="videoFrame"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="footer-brand">
+            <a href="#" class="logo">
+              <img
+                src="./assets/images/logo.png"
+                width="190"
+                height="28"
+                alt="wealthome"
+                class="logo-img neon-glow"
+              />
+            </a>
+
+            <p class="body-medium footer-text">
+              Discover your dream home with Wealthome. We connect buyers with exceptional properties 
+              and help sellers maximize their investment value. Our premium service ensures a seamless experience.
+            </p>
+          </div>
+
+          <nav class="footer-nav" aria-labelledby="nav-label-1">
+            <p class="title-small footer-list-title neon-text" id="nav-label-1">
+              Quick link
+            </p>
+
+            <ul class="footer-list">
+              <li>
+                <a href="#" class="body-medium footer-link neon-text-hover">Home</a>
+              </li>
+
+              <li>
+                <a href="./pages/buy.html" class="body-medium footer-link neon-text-hover">Buy</a>
+              </li>
+
+              <li>
+                <a href="./pages/sell.html" class="body-medium footer-link neon-text-hover">Sell</a>
+              </li>
+
+              <li>
+                <a href="./pages/rent.html" class="body-medium footer-link neon-text-hover">Rent</a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="footer-nav" aria-labelledby="nav-label-2">
+            <p class="title-small footer-list-title neon-text" id="nav-label-2">
+              Support
+            </p>
+
+            <ul class="footer-list">
+              <li>
+                <a href="./pages/about.html" class="body-medium footer-link neon-text-hover">About us</a>
+              </li>
+
+              <li>
+                <a href="#" class="body-medium footer-link neon-text-hover">Contact us</a>
+              </li>
+
+              <li>
+                <a href="#" class="body-medium footer-link neon-text-hover">Privacy Policy</a>
+              </li>
+
+              <li>
+                <a href="#" class="body-medium footer-link neon-text-hover">Terms & Conditions</a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="footer-nav" aria-labelledby="nav-label-3">
+            <p class="title-small footer-list-title neon-text" id="nav-label-3">
+              Get in touch
+            </p>
+
+            <ul class="footer-list">
+              <li>
+                <a href="mailto:hello@wealthome.com" class="body-medium footer-link neon-text-hover">hello@wealthome.com</a>
+              </li>
+
+              <li>
+                <address class="address body-medium">
+                  4140 Parker Rd. Allentown, New Mexico 31134
+                </address>
+              </li>
+
+              <li>
+                <ul class="social-list">
+                  <li>
+                    <a href="#" class="social-link neon-social">
+                      <span class="material-symbols-rounded">facebook</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="social-link neon-social">
+                      <span class="material-symbols-rounded">twitter</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="social-link neon-social">
+                      <span class="material-symbols-rounded">photo_camera</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <p class="copyright body-medium neon-text">Copyright 2025 Wealthome | Created by Mohammed Naveed</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Firebase Config -->
+    <script src="./assets/js/firebase-config.js"></script>
+    <!-- Main JS -->
+    <script src="script.js"></script>
+  </body>
+</html>
