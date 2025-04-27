@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Property - Wealthome</title>
+    <link rel="stylesheet" href="../assets/css/shared.css"/>
+    <link rel="stylesheet" href="C:\Users\ELCOT\Downloads\verealestatewebsitemaincopy-copy-copy (1)\real-estate-website\assets\css\sell.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="rent.html">Rent</a></li>
+                <li><a href="sell.html">Sell</a></li>
+                <li><a href="buy.html">Buy</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="sell-property">
+            <h1>Sell Your Property</h1>
+            <form action="#" method="post" id="sell-form">
+                <div>
+                    <label for="property-title">Property Title</label>
+                    <input type="text" id="property-title" name="property-title" required>
+                </div>
+                <div>
+                    <label for="property-description">Description</label>
+                    <textarea id="property-description" name="property-description" required></textarea>
+                </div>
+                <div>
+                    <label for="property-price">Price</label>
+                    <input type="number" id="property-price" name="property-price" required>
+                </div>
+                <div>
+                    <label for="property-images">Upload Images</label>
+                    <input type="file" id="property-images" name="property-images" multiple required>
+                </div>
+                <button type="submit">List Property</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Wealthome. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/shared.js"></script>
+    <script src="../assets/js/sell.js"></script>
+</body>
+</html>

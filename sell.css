@@ -1,0 +1,61 @@
+/
+real-estate-website/real-estate-website/assets/css/sell.css
+
+/* Sell Page Styles */
+
+/* Layout for the sell page */
+.sell-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Title styles */
+.sell-page h1 {
+  font-size: var(--fs-headline-large);
+  color: var(--primary-100);
+  margin-bottom: 20px;
+}
+
+/* Form styles */
+.sell-form {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--neutral-100);
+  padding: 20px;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-2);
+}
+
+/* Input field styles */
+.sell-form input,
+.sell-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--neutral-40);
+  border-radius: var(--radius-small);
+}
+
+/* Button styles */
+.sell-form button {
+  background-color: var(--primary-100);
+  color: var(--white);
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: background-color var(--transition-duration-quick);
+}
+
+.sell-form button:hover {
+  background-color: var(--primary-90);
+}
+
+/* Message styles */
+.sell-message {
+  margin-top: 20px;
+  font-size: var(--fs-body-medium);
+  color: var(--neutral-60);
+}

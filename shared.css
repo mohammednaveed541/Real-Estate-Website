@@ -1,0 +1,93 @@
+/*real-estate-website/real-estate-website/assets/css/shared.css*/
+
+/* Shared styles for the real estate website */
+
+/* Common typography */
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+  color: #303133;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #0f4392;
+}
+
+/* Common button styles */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-fill {
+  background-color: #00c2ff;
+  color: white;
+}
+
+.btn-fill:hover {
+  background-color: #00b3e6;
+}
+
+.btn-outline {
+  border: 2px solid #00c2ff;
+  color: #00c2ff;
+}
+
+.btn-outline:hover {
+  background-color: #00c2ff;
+  color: white;
+}
+
+/* Layout utilities */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -15px;
+}
+
+.col {
+  padding: 15px;
+  flex: 1;
+}
+
+/* Form styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dadfe5;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  border-color: #00c2ff;
+  outline: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}
